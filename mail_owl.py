@@ -12,6 +12,20 @@ class mail_owl():
         mydate = datetime.datetime.now()-datetime.timedelta(1)
         self.today = mydate.strftime("%d-%b-%Y")
 
+    def login(self, username, password):
+        self.username = username
+        self.password = password
+        while True:
+            try:
+                self.imap = imaplib.IMAP4_SSL(config.imap_server,config.imap_port)
+                r, d = self.imap.login(username, password)
+                assert r == 'OK', 'login failed'
+                print(" > Sign as ", d)
+            except:
+                print(" > Sign In ...")
+                continue
+            break
+
     
     
    
