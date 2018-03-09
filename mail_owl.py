@@ -25,7 +25,20 @@ class mail_owl():
                 print(" > Sign In ...")
                 continue
             break
+    
+    def list(self):
+        # self.login()
+        return self.imap.list()
 
+    def select(self, str):
+        return self.imap.select(str)
+
+    def inbox(self):
+        return self.imap.select("Inbox")
+
+    def logout(self):
+        return self.imap.logout()
+    
     
     
    
