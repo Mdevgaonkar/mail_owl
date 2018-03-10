@@ -38,7 +38,18 @@ class mail_owl():
 
     def logout(self):
         return self.imap.logout()
-    
-    
+
+    def unreadIds(self):
+        r, d = self.imap.search(None, "UNSEEN")
+        list = d[0].decode("utf-8").split(' ')
+        return list
+
+    def hasUnread(self):
+        list = self.unreadIds()
+        return list != ['']
+
+    def unreadCnt(self):
+        list = self.unreadIds()
+        return len(list)
     
    

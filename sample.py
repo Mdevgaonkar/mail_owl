@@ -8,4 +8,10 @@ mail.select('testingfolder')
 # #to select inbox use inbox function directly
 # mail.inbox() 
 
+if mail.hasUnread() :
+    unreadCnt = mail.unreadCnt()
+    print("You have %d unread messages" % unreadCnt)
+else:
+    print('No unread messages for now')
+
 mail.logout()
