@@ -52,4 +52,15 @@ class mail_owl():
         list = self.unreadIds()
         return len(list)
     
+    def latestUnread(self):
+        list = self.unreadIds()
+        latest_id = list[-1]
+        return self.getEmail(str(latest_id))
+    
+    def getEmail(self, id):
+        r, d = self.imap.fetch(id, "(RFC822)")
+        self.raw_email = d[0][1].decode("utf-8")
+        self.email_message = email.message_from_string(self.raw_email)
+        return self.email_message
+    
    

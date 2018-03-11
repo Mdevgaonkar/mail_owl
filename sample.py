@@ -11,6 +11,8 @@ mail.select('testingfolder')
 if mail.hasUnread() :
     unreadCnt = mail.unreadCnt()
     print("You have %d unread messages" % unreadCnt)
+    message = mail.latestUnread()
+    print(message)
 else:
     print('No unread messages for now')
 
