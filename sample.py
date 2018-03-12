@@ -12,7 +12,9 @@ if mail.hasUnread() :
     unreadCnt = mail.unreadCnt()
     print("You have %d unread messages" % unreadCnt)
     message = mail.latestUnread()
-    print(message)
+    # print(message)
+    mailbody = mail.getMailbody(message)
+    print(mailbody)
 else:
     print('No unread messages for now')
 

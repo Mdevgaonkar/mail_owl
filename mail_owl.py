@@ -62,5 +62,20 @@ class mail_owl():
         self.raw_email = d[0][1].decode("utf-8")
         self.email_message = email.message_from_string(self.raw_email)
         return self.email_message
-    
-   
+    def getMailbody(self, email_message):
+        if email_message.is_multipart():
+            for payload in email_message.get_payload():
+                # if payload.is_multipart(): ...
+                body = (
+                    payload.get_payload()
+                    .split(email_message['from'])[0]
+                    .split('\r\n\r\n2015')[0]
+                )
+                return body
+        else:
+            body = (
+                email_message.get_payload()
+                .split(email_message['from'])[0]
+                .split('\r\n\r\n2015')[0]
+            )
+            return body
