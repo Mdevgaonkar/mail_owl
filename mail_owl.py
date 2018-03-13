@@ -79,3 +79,24 @@ class mail_owl():
                 .split('\r\n\r\n2015')[0]
             )
             return body
+
+    def getMailsubject(self, email_message):
+        return email_message['Subject']
+    
+    def getMailfrom(self, email_message):
+        return email_message['from']
+
+    def getMailto(self, email_message):
+        return email_message['to']
+
+    def mailreturnpath(self, email_message):
+        return email_message['Return-Path']
+
+    def mailreplyto(self, email_message):
+        return email_message['Reply-To']
+
+    def mailall(self, email_message):
+        return email_message
+
+    def mailbodydecoded(self, email_message):
+        return base64.urlsafe_b64decode(self.getMailbody(email_message))
