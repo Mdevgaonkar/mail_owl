@@ -100,3 +100,21 @@ class mail_owl():
 
     def mailbodydecoded(self, email_message):
         return base64.urlsafe_b64decode(self.getMailbody(email_message))
+
+    def sendEmailMIME(self, recipient, subject, message):
+        msg = email.mime.multipart.MIMEMultipart()
+        msg['to'] = recipient
+        msg['from'] = self.username
+        msg['subject'] = subject
+        msg.add_header('reply-to', self.username)
+        # headers = "\r\n".join(["from: " + "sms@kitaklik.com","subject: " + subject,"to: " + recipient,"mime-version: 1.0","content-type: text/html"])
+        # content = headers + "\r\n\r\n" + message
+        try:
+            self.smtp = smtplib.SMTP(config.smtp_server, config.smtp_port)
+            self.smtp.ehlo()
+            self.smtp.starttls()
+            self.smtp.login(self.username, self.password)
+            self.smtp.sendmail(msg['from'], [msg['to']], msg.as_string())
+            print("   email replied")
+        except smtplib.SMTPException:
+            print("Error: unable to send email")
