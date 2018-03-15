@@ -118,3 +118,25 @@ class mail_owl():
             print("   email replied")
         except smtplib.SMTPException:
             print("Error: unable to send email")
+
+    def sendEmail(self, recipient, subject, message):
+        headers = "\r\n".join([
+            "from: " + self.username,
+            "subject: " + subject,
+            "to: " + recipient,
+            "mime-version: 1.0",
+            "content-type: text/html"
+        ])
+        content = headers + "\r\n\r\n" + message
+        while True:
+            try:
+                self.smtp = smtplib.SMTP(config.smtp_server, config.smtp_port)
+                self.smtp.ehlo()
+                self.smtp.starttls()
+                self.smtp.login(self.username, self.password)
+                self.smtp.sendmail(self.username, recipient, content)
+                print("   email replied")
+            except:
+                print("   Sending email...")
+                continue
+            break
