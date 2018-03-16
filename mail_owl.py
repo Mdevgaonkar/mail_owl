@@ -146,4 +146,8 @@ class mail_owl():
         list = d[0].decode("utf-8").split(' ')
         return list
 
+    def readToday(self):
+        list = self.readIdsToday()
+        latest_id = list[-1]
+        return self.getEmail(str(latest_id))
     
