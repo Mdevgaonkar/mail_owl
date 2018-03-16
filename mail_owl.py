@@ -140,3 +140,10 @@ class mail_owl():
                 print("   Sending email...")
                 continue
             break
+
+    def readIdsToday(self):
+        r, d = self.imap.search(None, '(SINCE "'+self.today+'")', 'SEEN')
+        list = d[0].decode("utf-8").split(' ')
+        return list
+
+    
