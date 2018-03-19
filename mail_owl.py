@@ -164,3 +164,8 @@ class mail_owl():
         self.raw_email = d[0][1]
         return self.raw_email
     
+    def readOnly(self, folder):
+        return self.imap.select(folder, readonly=True)
+
+    def writeEnable(self, folder):
+        return self.imap.select(folder, readonly=False)
