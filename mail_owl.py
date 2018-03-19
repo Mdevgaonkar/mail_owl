@@ -150,4 +150,10 @@ class mail_owl():
         list = self.readIdsToday()
         latest_id = list[-1]
         return self.getEmail(str(latest_id))
+
+
+    def readIds(self):
+        r, d = self.imap.search(None, "SEEN")
+        list = d[0].decode("utf-8").split(' ')
+        return list
     
