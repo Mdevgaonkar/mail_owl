@@ -156,4 +156,11 @@ class mail_owl():
         r, d = self.imap.search(None, "SEEN")
         list = d[0].decode("utf-8").split(' ')
         return list
+        
+    def rawRead(self):
+        list = self.readIds()
+        latest_id = list[-1]
+        r, d = self.imap.fetch(latest_id, "(RFC822)")
+        self.raw_email = d[0][1]
+        return self.raw_email
     
