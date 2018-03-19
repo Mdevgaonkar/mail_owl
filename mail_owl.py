@@ -169,3 +169,8 @@ class mail_owl():
 
     def writeEnable(self, folder):
         return self.imap.select(folder, readonly=False)
+
+    def allIds(self):
+        r, d = self.imap.search(None, "ALL")
+        list = d[0].decode("utf-8").split(' ')
+        return list
